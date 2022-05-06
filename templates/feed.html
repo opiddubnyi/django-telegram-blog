@@ -1,0 +1,63 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+    <div class="row border border-white">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-2 g-2">
+            {% for post in page_obj %}
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="/{{ post.image }}"/>
+                        <div class="card-body">
+                            <p class="card-text">{{ post.title }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="/blog/post/{{ post.id }}"
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    </a>
+
+                                </div>
+                                <small class="text-muted">{{ post.created_time.date }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="mx-auto my-2 w-auto">
+                <div class="pagination">
+                    <div class="row">
+                        {% if page_obj.has_previous %}
+                            <div class="col px-0">
+                                <a class="btn btn-outline-dark mb-4 btn-sm" href="?page=1">&laquo;</a>
+                            </div>
+                        {% endif %}
+
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                                <div class="col px-0">
+                                    <a class="btn btn-dark btn-sm">{{ num }}</a>
+                                </div>
+                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                <div class="col px-0">
+                                    <a class="btn btn-outline-dark mb-4 btn-sm" href="?page={{ num }}">{{ num }}</a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+
+                        {% if page_obj.has_next %}
+                            <div class="col px-0">
+                                <a class="btn btn-outline-dark mb-4 btn-sm"
+                                   href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
+                            </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

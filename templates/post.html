@@ -1,0 +1,20 @@
+{% extends 'index.html' %}
+
+
+
+
+{% block content %}
+    <h1>
+        {{ post_obj.title }}
+    </h1>
+
+    <img class="bd-placeholder-img card-img-top" width="100%" src="/{{ post_obj.image }}"/>
+    {{ post_obj.content|safe }}
+    {{ post_obj.user }}
+    {{ post.created_time.date }}
+
+
+{% endblock %}
+
+
+

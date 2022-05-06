@@ -1,0 +1,5 @@
+<div class="list-group">
+    {% for tag in tags_list %}
+        <a href="/blog/tag/{{ tag.id }}" class="list-group-item">{{ tag.title }}</a>
+    {% endfor %}
+</div>
